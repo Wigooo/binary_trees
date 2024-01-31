@@ -71,5 +71,7 @@ bst_t *bst_search(const bst_t *tree, int value);
 avl_t *avl_insert(avl_t **tree, int value);
 avl_t *avl_remove(avl_t *root, int value);
 heap_t *heap_insert(heap_t **root, int value);
+int heap_extract(heap_t **root);
+
 
 #endif
