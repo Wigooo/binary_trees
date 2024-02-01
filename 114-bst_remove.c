@@ -27,9 +27,9 @@ bst_t *bst_remove(bst_t *root, int value)
 	if (!root)
 		return (NULL);
 
-	if (root->n > value)
+	if (value < root->n)
 		root->left = bst_remove(root->left, value);
-	else if (root->n < value)
+	else if (value > root->n)
 		root->right = bst_remove(root->right, value);
 	else
 	{
