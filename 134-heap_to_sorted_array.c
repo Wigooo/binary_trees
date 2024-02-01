@@ -1,52 +1,55 @@
 #include "binary_trees.h"
+
 /**
- * binary_tree_node - creates a binary tree node
- * @parent: pointer to the parent node of the node to create
- * @value: value to put in the new node
- * Return: pointer to the new node, or NULL on failure
+ * tree_size - measures the sum of heights of a binary tree
+ * @tree: pointer to the root node of the tree to measure the height
+ *
+ * Return: Height or 0 if tree is NULL
  */
 
-binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
+size_t tree_size(const binary_tree_t *tree)
 {
-	binary_tree_t *newnode;
+	size_t height_l = 0;
+	size_t height_r = 0;
 
-	newnode = malloc(sizeof(binary_tree_t));
+	if (!tree)
+		return (0);
 
-	if (!newnode)
-		return (NULL);
+	if (tree->left)
+		height_l = 1 + tree_size(tree->left);
 
-	newnode->n = value;
-	newnode->parent = parent;
-	newnode->left = NULL;
-	newnode->right = NULL;
-	return (newnode);
+	if (tree->right)
+		height_r = 1 + tree_size(tree->right);
+
+	return (height_l + height_r);
 }
 
 /**
- * heap_to_sorted_array - converts a Binary Max Heap to a
- *				sorted array of integers.
- * @heap: pointer to root node
- * @size: address to store size of array
- * Return: pointer to array
- */
+ * heap_to_sorted_array - converts a Binary Max Heap
+ * to a sorted array of integers
+ *
+ * @heap: pointer to the root node of the heap to convert
+ * @size: address to store the size of the array
+ *
+ * Return: pointer to array sorted in descending order
+*/
+
 int *heap_to_sorted_array(heap_t *heap, size_t *size)
 {
-	int *array;
-	int extract, i = 0;
-	size_t hpsize;
+	int i, *a = NULL;
 
-	if (!heap)
+	if (!heap || !size)
 		return (NULL);
-	hpsize = binary_tree_size(heap);
-	*size = hpsize;
-	array = malloc(hpsize * sizeof(int));
-	if (!array)
+
+	*size = tree_size(heap) + 1;
+
+	a = malloc(sizeof(int) * (*size));
+
+	if (!a)
 		return (NULL);
-	while (heap)
-	{
-		extract = heap_extract(&heap);
-		array[i] = extract;
-		i++;
-	}
-	return (array);
+
+	for (i = 0; heap; i++)
+		a[i] = heap_extract(&heap);
+
+	return (a);
 }
