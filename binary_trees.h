@@ -29,6 +29,8 @@ typedef struct binary_tree_s bst_t;
 typedef struct binary_tree_s avl_t;
 typedef struct binary_tree_s heap_t;
 
+
+
 /**
  * struct levelorder_queue_s - Level order traversal queue.
  * @node: A node of a binary tree.
@@ -73,6 +75,7 @@ avl_t *avl_insert(avl_t **tree, int value);
 avl_t *avl_remove(avl_t *root, int value);
 heap_t *heap_insert(heap_t **root, int value);
 int heap_extract(heap_t **root);
+int binary_tree_is_bst(const binary_tree_t *tree);
 
 
 #endif
