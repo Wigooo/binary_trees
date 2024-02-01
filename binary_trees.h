@@ -76,6 +76,6 @@ avl_t *avl_remove(avl_t *root, int value);
 heap_t *heap_insert(heap_t **root, int value);
 int heap_extract(heap_t **root);
 int binary_tree_is_bst(const binary_tree_t *tree);
-
+bst_t *array_to_bst(int *array, size_t size);
 
 #endif
