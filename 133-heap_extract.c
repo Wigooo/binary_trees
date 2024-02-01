@@ -114,7 +114,7 @@ void heapify(heap_t *root)
  * heap_extract - extract root
  *
  * @root: pointer
- * 
+ *
  * Return: int
 */
 
