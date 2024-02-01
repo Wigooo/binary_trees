@@ -1,10 +1,8 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_rotate_righ - rotate right
- *
+ * binary_tree_rotate_right - rotate right
  * @tree: pointer
- *
  * Return: binary_tree
 */
 

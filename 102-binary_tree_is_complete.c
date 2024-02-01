@@ -2,7 +2,8 @@
 
 levelorder_queue_t *create_node(binary_tree_t *node);
 void free_queue(levelorder_queue_t *head);
-void push(binary_tree_t *node, levelorder_queue_t *head, levelorder_queue_t **tail);
+void push(binary_tree_t *node, levelorder_queue_t *head,
+		levelorder_queue_t **tail);
 void pop(levelorder_queue_t **head);
 int binary_tree_is_complete(const binary_tree_t *tree);
 
@@ -38,11 +39,12 @@ levelorder_queue_t *create_node(binary_tree_t *node)
 void free_queue(levelorder_queue_t *head)
 {
 	levelorder_queue_t *tmp;
+
 	while (head != NULL)
 	{
 		tmp = head->next;
 		free(head);
-		free(head);
+		head = tmp;
 	}
 }
 
@@ -56,7 +58,8 @@ void free_queue(levelorder_queue_t *head)
  * Description: Upon malloc failure, exits with a status code of 1.
 */
 
-void push(binary_tree_t *node, levelorder_queue_t *head, levelorder_queue_t **tail)
+void push(binary_tree_t *node, levelorder_queue_t *head,
+		levelorder_queue_t **tail)
 {
 	levelorder_queue_t *new;
 
@@ -89,7 +92,7 @@ void pop(levelorder_queue_t **head)
  * binary_tree_is_complete - check if it's complete
  *
  * @tree: pointer
- * 
+ *
  * Return: Null 0
  *
  * Description: Upon malloc failure, exits with a status code of 1.
