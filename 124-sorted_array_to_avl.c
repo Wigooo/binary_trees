@@ -1,8 +1,7 @@
 #include "binary_trees.h"
 
 avl_t *sorted_array_to_avl(int *array, size_t size);
-avl_t *aux_sort(avl_t *parent, int *array, int begin, int last);
-
+avl_t *toavltree(avl_t *parent, int *array, int first, int last);
 /**
  * sorted_array_to_avl - Builds an AVL tree from an array.
  *
@@ -15,34 +14,34 @@ avl_t *sorted_array_to_avl(int *array, size_t size)
 {
 	if (array == NULL || size == 0)
 		return (NULL);
-	return (aux_sort(NULL, array, 0, ((int)(size)) - 1));
+	return (toavltree(NULL, array, 0, ((int)(size)) - 1));
 }
 
 /**
- * aux_sort - Create the tree using the half element of the array.
+ * toavltree - Create the tree using the half element of the array.
  *
  * @parent: Parent of the node to create.
  * @array: Sorted array.
- * @begin: Position where the array starts.
+ * @first: Position where the array starts.
  * @last: Position where the array ends.
  *
  * Return: Tree created.
  */
-avl_t *aux_sort(avl_t *parent, int *array, int begin, int last)
+avl_t *toavltree(avl_t *parent, int *array, int first, int last)
 {
 	avl_t *root;
 	binary_tree_t *aux;
-	int mid = 0;
+	int middle = 0;
 
-	if (begin <= last)
+	if (first <= last)
 	{
-		mid = (begin + last) / 2;
-		aux = binary_tree_node((binary_tree_t *)parent, array[mid]);
+		middle = (first + last) / 2;
+		aux = binary_tree_node((binary_tree_t *)parent, array[middle]);
 		if (aux == NULL)
 			return (NULL);
 		root = (avl_t *)aux;
-		root->left = aux_sort(root, array, begin, mid - 1);
-		root->right = aux_sort(root, array, mid + 1, last);
+		root->left = toavltree(root, array, first, middle - 1);
+		root->right = toavltree(root, array, middle + 1, last);
 		return (root);
 	}
 	return (NULL);
